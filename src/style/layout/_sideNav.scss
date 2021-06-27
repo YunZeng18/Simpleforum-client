@@ -1,0 +1,44 @@
+.side-nav {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	top: 60px;
+	z-index: 998;
+
+	background-color: $sideNav-bgc;
+	padding: 15px;
+	overflow: auto;
+	::-webkit-scrollbar {
+		display: none;
+	}
+	margin: 1rem;
+	border-radius: 1rem;
+	border: 1px solid $border-color;
+	&__my-forums {
+		display: flex;
+		flex-direction: column;
+	}
+	&__heading {
+		font-size: 1rem;
+		margin-top: 2rem;
+	}
+	&__link {
+		width: 100%;
+
+		margin-top: 0.5rem !important;
+		padding: 0.2rem;
+		border-radius: 4px;
+		&:hover {
+			background-color: $sideNav-hover;
+		}
+	}
+	&__group {
+		li {
+			margin-top: 0.5rem;
+			margin-left: 1rem;
+		}
+	}
+	&__link--active {
+		background-color: $sideNav-active;
+	}
+}

@@ -1,0 +1,307 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap");
+.main-style, .home, .forum-list, .forum-create, .forum-name, .work-in-progress {
+  margin: 76px 16px 0 246px;
+  padding: 20px;
+  background-color: #7179b8;
+  border-radius: 1rem;
+  border: 1px solid white;
+  width: 100%;
+}
+
+.focus-none:focus, .forum-create__text:focus, .forum-create__textarea:focus, .forum-name__text:focus, .forum-name__textarea:focus, .forum-name__post__comment__textarea:focus {
+  outline: none;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: 0;
+  font-weight: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.btn, .forum-list__btn, .forum-name__btn, .forum-name__post__btn--comment, .forum-name__post__comment__btn {
+  border-radius: 10px;
+  padding: 0.4rem 1rem;
+  border-style: none;
+  background-color: #009900;
+  color: white;
+}
+
+.btn:focus, .forum-list__btn:focus, .forum-name__btn:focus, .forum-name__post__btn--comment:focus, .forum-name__post__comment__btn:focus {
+  outline: none;
+}
+
+.btn:active, .forum-list__btn:active, .forum-name__btn:active, .forum-name__post__btn--comment:active, .forum-name__post__comment__btn:active {
+  background-color: #006600;
+}
+
+.btn:hover, .forum-list__btn:hover, .forum-name__btn:hover, .forum-name__post__btn--comment:hover, .forum-name__post__comment__btn:hover {
+  cursor: pointer;
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  background-color: #2283d7;
+  padding: 0.5rem 1rem;
+  color: #feee2f;
+}
+
+.header__logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.side-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: fixed;
+  top: 60px;
+  z-index: 998;
+  background-color: #f5a93f;
+  padding: 15px;
+  overflow: auto;
+  margin: 1rem;
+  border-radius: 1rem;
+  border: 1px solid white;
+}
+
+.side-nav ::-webkit-scrollbar {
+  display: none;
+}
+
+.side-nav__my-forums {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.side-nav__heading {
+  font-size: 1rem;
+  margin-top: 2rem;
+}
+
+.side-nav__link {
+  width: 100%;
+  margin-top: 0.5rem !important;
+  padding: 0.2rem;
+  border-radius: 4px;
+}
+
+.side-nav__link:hover {
+  background-color: #1e78b7;
+}
+
+.side-nav__group li {
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}
+
+.side-nav__link--active {
+  background-color: #c4760a;
+}
+
+.forum-list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 1rem 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.forum-list__item__description {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+}
+
+.forum-list__btn {
+  margin-right: 1rem;
+}
+
+.forum-create__text-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.forum-create__text-input .label {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.forum-create__textarea {
+  height: 4rem;
+}
+
+.forum-create__links {
+  margin-top: 1rem;
+}
+
+.forum-create__btn {
+  margin-left: 3rem;
+}
+
+.forum-name__details {
+  font-size: 0.7rem;
+}
+
+.forum-name__details--moderator {
+  text-decoration: underline;
+  margin: 0 1rem;
+}
+
+.forum-name__description {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.forum-name__text-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.forum-name__text-input .label {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.forum-name__textarea {
+  height: 4rem;
+}
+
+.forum-name__btn {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin-top: 1rem;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+.forum-name__post {
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid white;
+}
+
+.forum-name__post__author {
+  text-decoration: underline;
+}
+
+.forum-name__post__btn--comment {
+  margin-top: 1rem;
+}
+
+.forum-name__post__comment {
+  margin: 1rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+}
+
+.forum-name__post__comment__textarea {
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.forum-name__post__comment__btn {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "JetBrains Mono", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #bceffd;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#root {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  color: #041972;
+}
+
+#root .header {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+}
+/*# sourceMappingURL=index.css.map */

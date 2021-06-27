@@ -1,0 +1,19 @@
+$primary-color: #041972;
+$primary-color--light: lighten($primary-color, 10%);
+$primary-color--dark: darken($primary-color, 10%);
+
+$secondary-color: #2283d7;
+$secondary-color--light: lighten($secondary-color, 10%);
+$secondary-color--dark: darken($secondary-color, 10%);
+
+$default-bgc: #bceffd;
+$header-bgc: #2283d7;
+$logo: #feee2f;
+$sideNav-bgc: #f5a93f;
+$sideNav-active: darken($sideNav-bgc, 20%);
+$sideNav-hover: #1e78b7;
+$main-bgc: #7179b8;
+$border-color: white;
+
+$btn-bgc: #009900;
+$btn-bgc--dark: darken($btn-bgc, 10%);

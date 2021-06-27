@@ -1,0 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap");
+@import "./partial/variable";
+@import "./partial/utility";
+@import "./partial/base";
+@import "./partial/button";
+@import "./layout/header";
+@import "./layout/sideNav";
+@import "./layout/home";
+@import "./layout/forumList";
+@import "./layout/forumCreate";
+@import "./layout/forumName";
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "JetBrains Mono", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+		"Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: $default-bgc;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+#root {
+	display: flex;
+	flex-flow: row wrap;
+	color: $primary-color;
+
+	.header {
+		//header
+		flex-basis: 100%;
+	}
+}
+.work-in-progress {
+	@extend .main-style;
+}

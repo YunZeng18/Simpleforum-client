@@ -1,0 +1,63 @@
+.forum-name {
+	@extend .main-style;
+	&__details {
+		font-size: 0.7rem;
+		&--moderator {
+			text-decoration: underline;
+			margin: 0 1rem;
+		}
+	}
+	&__description {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+	&__text-input {
+		display: flex;
+		flex-direction: column;
+
+		.label {
+			margin-top: 1rem;
+			margin-bottom: 0.5rem;
+		}
+	}
+	&__text {
+		@extend .focus-none;
+	}
+	&__textarea {
+		height: 4rem;
+		@extend .focus-none;
+	}
+	&__btn {
+		@extend .btn;
+		width: fit-content;
+		margin-top: 1rem;
+		align-self: flex-end;
+	}
+	&__post {
+		padding-top: 2rem;
+		margin-top: 2rem;
+		border-top: 1px solid $border-color;
+		&__author {
+			text-decoration: underline;
+		}
+		&__btn--comment {
+			@extend .btn;
+			margin-top: 1rem;
+		}
+		&__comment {
+			margin: 1rem 0;
+			display: flex;
+			flex-flow: column;
+
+			&__textarea {
+				@extend .focus-none;
+				height: 3rem;
+				margin-bottom: 1rem;
+			}
+			&__btn {
+				@extend .btn;
+				align-self: flex-end;
+			}
+		}
+	}
+}

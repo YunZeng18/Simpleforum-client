@@ -1,0 +1,18 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 999;
+	background-color: $header-bgc;
+	padding: 0.5rem 1rem;
+	color: $logo;
+	&__logo {
+		display: flex;
+		align-items: center;
+		font-weight: bold;
+		font-size: 2rem;
+	}
+}

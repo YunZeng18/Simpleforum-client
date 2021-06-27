@@ -1,0 +1,26 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+	margin: 0;
+	font-weight: normal;
+}
+a {
+	text-decoration: none;
+}
+a:visited {
+	color: inherit;
+}
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}

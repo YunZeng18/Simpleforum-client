@@ -1,0 +1,25 @@
+.forum-create {
+	@extend .main-style;
+	&__text-input {
+		display: flex;
+		flex-direction: column;
+
+		.label {
+			margin-top: 1rem;
+			margin-bottom: 0.5rem;
+		}
+	}
+	&__text {
+		@extend .focus-none;
+	}
+	&__textarea {
+		height: 4rem;
+		@extend .focus-none;
+	}
+	&__links {
+		margin-top: 1rem;
+	}
+	&__btn {
+		margin-left: 3rem;
+	}
+}

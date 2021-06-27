@@ -1,0 +1,14 @@
+.main-style {
+	margin: 76px 16px 0 246px; //position the main content so it wont get covered by the header and side nav
+	padding: 20px;
+	background-color: $main-bgc;
+	border-radius: 1rem;
+	border: 1px solid $border-color;
+	width: 100%;
+}
+
+.focus-none {
+	&:focus {
+		outline: none;
+	}
+}

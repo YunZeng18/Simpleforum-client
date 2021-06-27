@@ -1,0 +1,17 @@
+.forum-list {
+	@extend .main-style;
+
+	&__item {
+		display: flex;
+		flex-wrap: wrap;
+		margin: 1rem 0;
+		align-items: center;
+	}
+	&__item__description {
+		flex-basis: 100%;
+	}
+	&__btn {
+		@extend .btn;
+		margin-right: 1rem;
+	}
+}
