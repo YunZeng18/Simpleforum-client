@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import { API_URL } from '../App';
+
+
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { fetchForums } from '../store/reducers/forumReducer';
 
 class ForumList extends Component {
-    constructor(props) {
-        super(props);
-
-    }
 
     componentWillMount() {
         this.props.fetchForums();
-
-
     }
     render() {
         console.log(this.props);
