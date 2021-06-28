@@ -6,9 +6,16 @@
 		flex-wrap: wrap;
 		margin: 1rem 0;
 		align-items: center;
+		background-color: darken($main-bgc, 10%);
+		padding: 1rem;
+		border-radius: 1rem;
+		&:hover {
+			background-color: darken($main-bgc, 20%);
+		}
 	}
 	&__item__description {
 		flex-basis: 100%;
+		font-size: 0.7rem;
 	}
 	&__btn {
 		@extend .btn;

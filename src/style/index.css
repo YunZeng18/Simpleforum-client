@@ -164,11 +164,19 @@ ul {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: #525ba4;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.forum-list__item:hover {
+  background-color: #414882;
 }
 
 .forum-list__item__description {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
+  font-size: 0.7rem;
 }
 
 .forum-list__btn {

@@ -1,9 +1,10 @@
-import axios from 'axios';
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { API_URL } from '../App';
+import { connect } from "react-redux";
+import { createForum } from '../store/reducers/forumReducer';
+import PropTypes from 'prop-types'
 
-export default class ForumCreate extends Component {
+class ForumCreate extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -12,34 +13,20 @@ export default class ForumCreate extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const name = event.target.name.value;
-        const description = event.target.description.value;
+        const newForum = {
+            name: event.target.name.value,
+            description: event.target.description.value
+        }
 
-
-        if (!name || !description) {
+        if (!newForum.name || !newForum.description) {
             alert("Please fill in a title and a description for the forum.");
         } else {
 
-
-            console.log(this.props);
-            axios
-                .post(`${API_URL}/forum`, {
-                    name: name,
-                    description: description,
-                    owner: this.props.state.displayName
-                })
-                .then(response => {
-
-                    alert("Forum created");
-
-                })
-                .catch(error => console.log(error));
+            this.props.createForum(newForum);
+            return <Redirect push to='/forum/list' />
         }
     }
-    componentDidMount() {
 
-
-    }
     render() {
 
         return (
@@ -64,3 +51,9 @@ export default class ForumCreate extends Component {
         );
     }
 }
+
+ForumCreate.propTypes = {
+    createForum: PropTypes.func.isRequired
+}
+
+export default connect(null, { createForum })(ForumCreate);

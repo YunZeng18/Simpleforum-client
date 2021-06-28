@@ -45,7 +45,7 @@ export default class App extends Component {
                         <Route path="/" component={Home} exact />
                         <Route path="/forum/list" component={ForumList} />
                         <Route path="/forum/create" render={(props) => <ForumCreate {...props} />} />
-                        <Route path="/forum/:name" render={(props) => <ForumName {...props} />} />
+                        <Route path="/forum/name=:name" render={(props) => <ForumName {...props} />} />
                         <Route path="/work-in-progress" component={WorkInProgress} />
                     </Switch>
 

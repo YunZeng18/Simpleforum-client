@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
-
 import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { fetchForums } from '../store/reducers/forumReducer';
+import PropTypes from 'prop-types'
 
 class ForumList extends Component {
 
@@ -11,31 +10,34 @@ class ForumList extends Component {
         this.props.fetchForums();
     }
     render() {
-        console.log(this.props);
+
         return (
             <main className="forum-list">
                 <h1>Forums</h1>
                 <ul>
-                    {this.props.forumList &&
-                        this.props.forumList.map(item =>
-                            <li className="forum-list__item">
-                                <button className="forum-list__btn">Join</button>
-                                <Link to={`/forum/${item.name}`}>
-                                    <h3>{item.name}</h3>
-                                    <p className="forum-list__item__description">{item.description}</p>
-                                </Link>
+                    {this.props.forumList.map(item =>
+                        <Link to={`/forum/name=${item.name}`} key={item.id}>
+                            <li className="forum-list__item" >
+                                <h3>{item.name}</h3>
+                                <p className="forum-list__item__description">{item.description}</p>
                             </li>
-                        )
-                    }
+                        </Link>
+                    )}
                 </ul>
             </main>
         );
     }
 }
+
+ForumList.propTypes = {
+    fetchForums: PropTypes.func.isRequired,
+    forumList: PropTypes.array.isRequired
+}
+
 const mapStateToProps = (state) => {
     return {
 
-        forumList: state.forums.items,
+        forumList: state.forums.list,
     };
 };
 export default connect(mapStateToProps, { fetchForums })(ForumList);
