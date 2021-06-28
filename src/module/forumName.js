@@ -112,14 +112,14 @@ class ForumName extends Component {
     render() {
 
 
-        const post = this.state.forum.post;
+
         if (this.props.currentForum) {
 
-            const { name, description, updated_at } = this.props.currentForum;
+            const { name, description, updated_at, posts } = this.props.currentForum;
             return (
                 <main className="forum-name">
                     <h1>{name}</h1>
-                    <p className="forum-name__details">Created on {timeDisplay(updated_at)} </p>
+                    <p className="forum-name__details">Created {timeDisplay(updated_at)}</p>
                     <p className="forum-name__description">{description}</p>
                     <form className="forum-name__text-input" onSubmit={this.handlePost}>
 
@@ -131,14 +131,11 @@ class ForumName extends Component {
 
                     </form>
                     <section>
-                        {post && sortByDate(post).map((item, index) =>
+                        {posts && sortByDate(posts).map((item, index) =>
                             <div className="forum-name__post">
                                 <h2>{item.title}</h2>
-                                <p>Posted by <span className="forum-name__post__author">{item.author}</span> {timeDisplay(item.timestamp)}</p>
-
-
-
-                                <button className="forum-name__post__btn--comment" onClick={this.handleClick} value={index}>{item.comment.length} Comments</button>
+                                <p>Posted {timeDisplay(item.updated_at)}</p>
+                                {/* <button className="forum-name__post__btn--comment" onClick={this.handleClick} value={index}>{item.comment.length} Comments</button>
                                 {this.state.forum.post[index].renderComment &&
                                     <form className="forum-name__post__comment" onSubmit={this.handleComment} id={item.title} index={index}>
                                         <textarea className='forum-name__post__comment__textarea' id="comment" type='texarea' placeholder="respect others!" />
@@ -147,7 +144,7 @@ class ForumName extends Component {
                                 }
                                 {this.state.forum.post[index].renderComment &&
                                     sortByDate(this.state.forum.post[index].comment).map(item => <p>{item.author} said: "{item.content}" {timeDisplay(item.timestamp)}</p>)
-                                }
+                                } */}
                             </div>
                         )}
 
