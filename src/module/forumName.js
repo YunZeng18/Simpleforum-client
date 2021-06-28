@@ -1,9 +1,12 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { API_URL } from '../App';
 import timeDisplay from './helper/timeFormat';
-export default class ForumName extends Component {
+import { connect } from "react-redux";
+import PropTypes from 'prop-types';
+import { fetchForumByName } from '../store/reducers/forumReducer';
+
+class ForumName extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,7 +27,7 @@ export default class ForumName extends Component {
         }
     }
     componentDidMount() {
-        this.getForum(this.props.match.params.name);
+        this.props.fetchForumByName(this.props.match.params.name);
     }
     getForum(name) {
         axios.get(`${API_URL}/forum/${name}`)
@@ -107,16 +110,17 @@ export default class ForumName extends Component {
 
     }
     render() {
-        const { forum } = this.state;
+
+
         const post = this.state.forum.post;
-        if (forum) {
+        if (this.props.currentForum) {
+
+            const { name, description, updated_at } = this.props.currentForum;
             return (
                 <main className="forum-name">
-                    <h1>{forum.name}</h1>
-                    <p className="forum-name__details">Created by {forum.owner} on {timeDisplay(forum.timestamp)} </p>
-                    <p className="forum-name__details">Moderators:
-                        {forum.moderator && forum.moderator.map(item => <span className="forum-name__details--moderator">{item}</span>)} <button className="btn">Become a Mod!</button></p>
-                    <p className="forum-name__description">{forum.description}</p>
+                    <h1>{name}</h1>
+                    <p className="forum-name__details">Created on {timeDisplay(updated_at)} </p>
+                    <p className="forum-name__description">{description}</p>
                     <form className="forum-name__text-input" onSubmit={this.handlePost}>
 
                         <label className='label' htmlFor="name">Title</label>
@@ -150,8 +154,23 @@ export default class ForumName extends Component {
                     </section>
                 </main>
             );
-        } else { return <main className="forum-name">Loading...</main>; }
+        } else { return null }
+
     }
 }
+
+ForumName.propTypes = {
+    fetchForumByName: PropTypes.func.isRequired,
+    currentForum: PropTypes.object.isRequired,
+}
+
+const mapStateToProps = (state) => {
+
+    return {
+
+        currentForum: state.forums.currentForum
+    };
+};
+export default connect(mapStateToProps, { fetchForumByName })(ForumName);
 
 const sortByDate = (arr) => arr.sort((a, b) => b.timestamp - a.timestamp);
