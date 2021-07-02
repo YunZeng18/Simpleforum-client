@@ -58,15 +58,15 @@ class ForumName extends Component {
     }
     handlePost(event) {
         event.preventDefault();
-        const title = event.target.name.value;
-        const content = event.target.description.value;
+        const title = event.target.newPostTitle.value;
+        const content = event.target.newPostContent.value;
         if (!title || !content) {
             alert("Please fill in a title and a content for the post.");
         } else {
             axios
-                .post(`${API_URL}/forum/${this.props.match.params.name}`, {
+                .post(`${API_URL}/posts/`, {
+                    forum_id: this.props.currentForum.id,
                     title: title,
-                    author: this.props.user.displayName,
                     content: content,
                 })
                 .then(response => {
@@ -123,18 +123,23 @@ class ForumName extends Component {
                     <p className="forum-name__description">{description}</p>
                     <form className="forum-name__text-input" onSubmit={this.handlePost}>
 
-                        <label className='label' htmlFor="name">Title</label>
-                        <input className='forum-name__text' type="text" id="name" placeholder="Relevant to the forum" autoComplete="off" />
-                        <label className='label' htmlFor="description">Content</label>
-                        <textarea className='forum-name__textarea' id="description" type='texarea' placeholder="Elaborate on the topic" />
+                        <label className='label' htmlFor="newPostTitle">Title</label>
+                        <input className='forum-name__text' type="text" id="newPostTitle" placeholder="Relevant to the forum" autoComplete="off" />
+                        <label className='label' htmlFor="newPostContent">Content</label>
+                        <textarea className='forum-name__textarea' id="newPostContent" type='texarea' placeholder="Elaborate on the topic" />
                         <button className="forum-name__btn" value="Submit">Post</button>
 
                     </form>
                     <section>
                         {posts && sortByDate(posts).map((item, index) =>
-                            <div className="forum-name__post">
+                            <div className="forum-name__post" key={item.id}>
                                 <h2>{item.title}</h2>
                                 <p>Posted {timeDisplay(item.updated_at)}</p>
+                                {item.display &&
+                                    <div>
+
+                                    </div>
+                                }
                                 {/* <button className="forum-name__post__btn--comment" onClick={this.handleClick} value={index}>{item.comment.length} Comments</button>
                                 {this.state.forum.post[index].renderComment &&
                                     <form className="forum-name__post__comment" onSubmit={this.handleComment} id={item.title} index={index}>
