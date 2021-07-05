@@ -4,7 +4,7 @@ import { API_URL } from '../App';
 import timeDisplay from './helper/timeFormat';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { fetchForumByName } from '../store/reducers/forumReducer';
+import { fetchForumByName, createPostByForumID } from '../store/reducers/forumReducer';
 
 class ForumName extends Component {
     constructor(props) {
