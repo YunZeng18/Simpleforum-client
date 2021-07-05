@@ -23,7 +23,8 @@ class ForumCreate extends Component {
         } else {
 
             this.props.createForum(newForum);
-            return <Redirect push to='/forum/list' />
+
+            this.props.history.push('/forum/list')
         }
     }
 
