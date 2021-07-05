@@ -5,11 +5,16 @@ import { API_URL } from "../../App";
 const GET_FORUMS = "GET_FORUMS";
 const ADD_FORUM = "ADD_FORUM";
 const GET_FORUM_BYNAME = "GET_FORUM_BYNAME";
+const GET_FORUM_BYID = "GET_FORUM_BYID";
+const ADD_POST = "ADD_POST"
+
 
 const initialState = {
     list: [],
-    item: {},
-    currentForum: {}
+    newForum: {},
+    currentForum: {
+        newPost: {}//this prevents undefined errors
+    }
 }
 
 export const fetchForums = () => dispatch => {
@@ -48,7 +53,34 @@ export const fetchForumByName = (name) => dispatch => {
         .catch(error => console.log(error));
 
 }
+export const fetchForumByID = (id) => dispatch => {
 
+    axios.get(`${API_URL}/forums/id=${id}`)
+        .then(res => res.data)
+        .then(currentForum => dispatch({
+            type: GET_FORUM_BYID,
+            payload: currentForum
+        }))
+        .catch(error => console.log(error));
+
+}
+export const createPostByForumID = (data) => dispatch => {
+    axios
+        .post(`${API_URL}/posts/`, {
+            forum_id: data.forum_id,
+            title: data.title,
+            content: data.content,
+        })
+        .then(res => res.data)
+        .then(post => {
+            dispatch({
+                type: ADD_POST,
+                payload: post
+            });
+
+        }).catch(error => console.log(error));
+
+}
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
@@ -62,12 +94,24 @@ const reducer = (state = initialState, action) => {
         case ADD_FORUM:
             return {
                 ...state,
-                item: action.payload
+                newForum: action.payload
             }
-        case GET_FORUM_BYNAME:
+        case GET_FORUM_BYNAME || GET_FORUM_BYID:
+            const currentForum = { ...action.payload, newPost: {} }//this prevents undefined errors by having new post set to null
             return {
                 ...state,
-                currentForum: action.payload
+                currentForum: currentForum
+            }
+        case ADD_POST:
+            const posts = [...state.currentForum.posts];
+            posts.unshift(action.payload);
+            return {
+                ...state,
+                currentForum: {
+                    ...state.currentForum,
+                    posts: posts,
+                    newPost: action.payload
+                }
             }
         default:
             return state;

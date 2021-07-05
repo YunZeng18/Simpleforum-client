@@ -37,8 +37,15 @@
 		padding-top: 2rem;
 		margin-top: 2rem;
 		border-top: 1px solid $border-color;
-		&__author {
-			text-decoration: underline;
+		:hover {
+			cursor: pointer;
+		}
+		&__time-stamp {
+			font-size: 0.7rem;
+		}
+		&__content {
+			margin-top: 1rem;
+			margin-bottom: 1rem;
 		}
 		&__btn--comment {
 			@extend .btn;

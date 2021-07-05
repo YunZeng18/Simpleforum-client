@@ -258,8 +258,17 @@ ul {
   border-top: 1px solid white;
 }
 
-.forum-name__post__author {
-  text-decoration: underline;
+.forum-name__post :hover {
+  cursor: pointer;
+}
+
+.forum-name__post__time-stamp {
+  font-size: 0.7rem;
+}
+
+.forum-name__post__content {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .forum-name__post__btn--comment {
