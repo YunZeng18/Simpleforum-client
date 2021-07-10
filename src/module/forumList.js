@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 
 class ForumList extends Component {
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.fetchForums();
     }
     render() {

@@ -5,12 +5,13 @@ import timeDisplay from './helper/timeFormat';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { fetchForumByName, createPostByForumID } from '../store/reducers/forumReducer';
+import { Modal } from '@material-ui/core/Modal';
 
 class ForumName extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            currentForum: { posts: [] }//keeps track of whether posts are rendered
         }
 
         this.handlePostRender = this.handlePostRender.bind(this);
@@ -20,10 +21,10 @@ class ForumName extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         const { params } = this.props.match;
-        if (params.name && prevProps.currentForum.name !== params.name) {
+        if (params.name && prevProps.currentForum.name !== params.name) {//when siwtch forums by entering different url links
             this.props.fetchForumByName(this.props.match.params.name);
         }
-        if (this.props.currentForum.id !== prevProps.currentForum.id) {
+        if (this.props.currentForum.id !== prevProps.currentForum.id) {//when you switch between different forums hide posts and only show titles
 
             this.setState({
                 currentForum: {
@@ -43,7 +44,9 @@ class ForumName extends Component {
     }
     componentDidMount() {
         this.props.fetchForumByName(this.props.match.params.name);
+
     }
+
 
     handlePostRender = (e, index) => {
         //add a render: true to render comments in a using the index of the post 
@@ -90,41 +93,43 @@ class ForumName extends Component {
         }
     }
 
-    handleCommentRender(event) {
-        event.preventDefault();
-        const comment = event.target.comment.value;
-        if (!comment) {
-            alert("Please dont enter an empty comment.");
-        } else {
-            // axios
-            //     .post(`${API_URL}/forum/${this.props.match.params.name}/${event.target.id}`, {
-            //         author: this.props.user.displayName,
-            //         content: comment,
-            //     })
-            //     .then(response => {
-            //         let updatePost = { ...this.state.forum.post }
+    openCommentModal(event) {
+        setOpen(true);
 
-            //         updatePost[event.target.attributes.index.value].comment = response.data;
-            //         console.log(updatePost);
-            //         console.log(this.state);
-            //         this.setState(prevState => (
-            //             {
-            //                 forum: {
-            //                     ...prevState.forum,
-            //                     post: { ...prevState.forum.post, comment: response.data }
-            //                 }
-            //             }
-            //         ))
-            //     })
-            //     .catch(error => console.log(error));
 
-        }
+        // event.preventDefault();
+        // const comment = event.target.comment.value;
+        // if (!comment) {
+        //     alert("Please dont enter an empty comment.");
+        // } else {
+        //     axios
+        //         .post(`${API_URL}/forum/${this.props.match.params.name}/${event.target.id}`, {
+        //             author: this.props.user.displayName,
+        //             content: comment,
+        //         })
+        //         .then(response => {
+        //             let updatePost = { ...this.state.forum.post }
+
+        //             updatePost[event.target.attributes.index.value].comment = response.data;
+        //             console.log(updatePost);
+        //             console.log(this.state);
+        //             this.setState(prevState => (
+        //                 {
+        //                     forum: {
+        //                         ...prevState.forum,
+        //                         post: { ...prevState.forum.post, comment: response.data }
+        //                     }
+        //                 }
+        //             ))
+        //         })
+        //         .catch(error => console.log(error));
+
+        // }
 
     }
     render() {
 
-
-        if (this.props.currentForum && this.state.currentForum) {
+        if (this.props.currentForum) {
             const { name, description, updated_at, posts } = this.props.currentForum;
 
             return (
@@ -149,7 +154,21 @@ class ForumName extends Component {
                                 {this.state.currentForum.posts[index] && this.state.currentForum.posts[index].renderPost &&
                                     <p className="forum-name__post__content">{item.content}</p>
                                 }
-                                <button className="forum-name__post__btn--comment" onClick={this.handleCommentRender} > Comments</button>
+                                <button className="forum-name__post__btn--comment" onClick={this.openCommentModal} > Comments</button>
+                                <Modal
+                                    open={this.openCommentModal}
+                                    onClose={handleClose}
+                                    aria-labelledby="simple-modal-title"
+                                    aria-describedby="simple-modal-description"
+                                >
+                                    {<div>
+                                        <h2 id="simple-modal-title">Text in a modal</h2>
+                                        <p id="simple-modal-description">
+                                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                                        </p>
+
+                                    </div>}
+                                </Modal>
                                 {/* 
                                 {this.state.forum.post[index].renderComment &&
                                     <form className="forum-name__post__comment" onSubmit={this.handleComment} id={item.title} index={index}>
