@@ -51,20 +51,7 @@
 			@extend .btn;
 			margin-top: 1rem;
 		}
-		&__comment {
-			margin: 1rem 0;
-			display: flex;
-			flex-flow: column;
-
-			&__textarea {
-				@extend .focus-none;
-				height: 3rem;
-				margin-bottom: 1rem;
-			}
-			&__btn {
-				@extend .btn;
-				align-self: flex-end;
-			}
+		&__comment-modal {
 		}
 	}
 }
