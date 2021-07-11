@@ -6,7 +6,8 @@ const GET_FORUMS = "GET_FORUMS";
 const ADD_FORUM = "ADD_FORUM";
 const GET_FORUM_BYNAME = "GET_FORUM_BYNAME";
 const GET_FORUM_BYID = "GET_FORUM_BYID";
-const ADD_POST = "ADD_POST"
+const ADD_POST = "ADD_POST";
+const GET_POST_BYID = "GET_POST_BYID";
 
 
 const initialState = {
@@ -14,7 +15,8 @@ const initialState = {
     newForum: {},
     currentForum: {
         newPost: {}//this prevents undefined errors
-    }
+    },
+    currentPost: {}
 }
 
 export const fetchForums = () => dispatch => {
@@ -82,6 +84,16 @@ export const createPostByForumID = (data) => dispatch => {
 
 }
 
+export const fetchPostbyID = (id) => dispatch => {
+    axios.get(`${API_URL}/posts/id=${id}`)
+        .then(res => res.data)
+        .then(currentPost => dispatch({
+            type: GET_POST_BYID,
+            payload: currentPost
+        }))
+        .catch(error => console.log(error));
+}
+
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_FORUMS:
@@ -113,6 +125,12 @@ const reducer = (state = initialState, action) => {
                     newPost: action.payload
                 }
             }
+        case GET_POST_BYID:
+            return {
+                ...state,
+                currentPost: action.payload.post
+            }
+
         default:
             return state;
     }

@@ -34,11 +34,14 @@
 		align-self: flex-end;
 	}
 	&__post {
+		@extend .container;
+		background-color: darken($main-bgc, 10%);
 		padding-top: 2rem;
 		margin-top: 2rem;
-		border-top: 1px solid $border-color;
-		:hover {
+
+		&:hover {
 			cursor: pointer;
+			background-color: darken($main-bgc, 15%);
 		}
 		&__time-stamp {
 			font-size: 0.7rem;
@@ -52,6 +55,9 @@
 			margin-top: 1rem;
 		}
 		&__comment-modal {
+			@extend .container;
+			width: 70%;
+			transform: translate(20%, 15%);
 		}
 	}
 }

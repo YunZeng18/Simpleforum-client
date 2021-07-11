@@ -8,8 +8,13 @@
   width: 100%;
 }
 
-.focus-none:focus, .forum-create__text:focus, .forum-create__textarea:focus, .forum-name__text:focus, .forum-name__textarea:focus, .forum-name__post__comment__textarea:focus {
+.focus-none:focus, .forum-create__text:focus, .forum-create__textarea:focus, .forum-name__text:focus, .forum-name__textarea:focus {
   outline: none;
+}
+
+.container, .forum-name__post, .forum-name__post__comment-modal {
+  padding: 20px;
+  border-radius: 1rem;
 }
 
 * {
@@ -46,7 +51,7 @@ ul {
   margin: 0;
 }
 
-.btn, .forum-list__btn, .forum-name__btn, .forum-name__post__btn--comment, .forum-name__post__comment__btn {
+.btn, .forum-list__btn, .forum-name__btn, .forum-name__post__btn--comment {
   border-radius: 10px;
   padding: 0.4rem 1rem;
   border-style: none;
@@ -54,15 +59,15 @@ ul {
   color: white;
 }
 
-.btn:focus, .forum-list__btn:focus, .forum-name__btn:focus, .forum-name__post__btn--comment:focus, .forum-name__post__comment__btn:focus {
+.btn:focus, .forum-list__btn:focus, .forum-name__btn:focus, .forum-name__post__btn--comment:focus {
   outline: none;
 }
 
-.btn:active, .forum-list__btn:active, .forum-name__btn:active, .forum-name__post__btn--comment:active, .forum-name__post__comment__btn:active {
+.btn:active, .forum-list__btn:active, .forum-name__btn:active, .forum-name__post__btn--comment:active {
   background-color: #006600;
 }
 
-.btn:hover, .forum-list__btn:hover, .forum-name__btn:hover, .forum-name__post__btn--comment:hover, .forum-name__post__comment__btn:hover {
+.btn:hover, .forum-list__btn:hover, .forum-name__btn:hover, .forum-name__post__btn--comment:hover {
   cursor: pointer;
 }
 
@@ -253,13 +258,14 @@ ul {
 }
 
 .forum-name__post {
+  background-color: #525ba4;
   padding-top: 2rem;
   margin-top: 2rem;
-  border-top: 1px solid white;
 }
 
-.forum-name__post :hover {
+.forum-name__post:hover {
   cursor: pointer;
+  background-color: #4a5293;
 }
 
 .forum-name__post__time-stamp {
@@ -275,25 +281,10 @@ ul {
   margin-top: 1rem;
 }
 
-.forum-name__post__comment {
-  margin: 1rem 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
-}
-
-.forum-name__post__comment__textarea {
-  height: 3rem;
-  margin-bottom: 1rem;
-}
-
-.forum-name__post__comment__btn {
-  -ms-flex-item-align: end;
-      align-self: flex-end;
+.forum-name__post__comment-modal {
+  width: 70%;
+  -webkit-transform: translate(20%, 15%);
+          transform: translate(20%, 15%);
 }
 
 body {

@@ -4,19 +4,23 @@ import { API_URL } from '../App';
 import timeDisplay from './helper/timeFormat';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { fetchForumByName, createPostByForumID } from '../store/reducers/forumReducer';
-import { Modal } from '@material-ui/core/Modal';
+import { fetchForumByName, createPostByForumID, fetchPostbyID } from '../store/reducers/forumReducer';
+import Modal from '@material-ui/core/Modal';
+import { Paper } from '@material-ui/core';
 
 class ForumName extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentForum: { posts: [] }//keeps track of whether posts are rendered
+            currentForum: { posts: [] },//keeps track of whether posts are rendered
+            modalCommentDisplay: false,
+            currentPost: {}
         }
 
         this.handlePostRender = this.handlePostRender.bind(this);
         this.handlePost = this.handlePost.bind(this);
-        this.handleCommentRender = this.handleCommentRender.bind(this);
+        this.modalCommentSwitch = this.modalCommentSwitch.bind(this);
+        this.openCommentModal = this.openCommentModal.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -92,10 +96,20 @@ class ForumName extends Component {
 
         }
     }
+    modalCommentSwitch() {
+        this.setState({
 
-    openCommentModal(event) {
-        setOpen(true);
+            modalCommentDisplay: false
+        })
+    }
+    openCommentModal(e, post_id) {
 
+        this.props.fetchPostbyID(post_id);
+        this.setState({
+
+            modalCommentDisplay: true
+        })
+        console.log(this.props);
 
         // event.preventDefault();
         // const comment = event.target.comment.value;
@@ -154,21 +168,8 @@ class ForumName extends Component {
                                 {this.state.currentForum.posts[index] && this.state.currentForum.posts[index].renderPost &&
                                     <p className="forum-name__post__content">{item.content}</p>
                                 }
-                                <button className="forum-name__post__btn--comment" onClick={this.openCommentModal} > Comments</button>
-                                <Modal
-                                    open={this.openCommentModal}
-                                    onClose={handleClose}
-                                    aria-labelledby="simple-modal-title"
-                                    aria-describedby="simple-modal-description"
-                                >
-                                    {<div>
-                                        <h2 id="simple-modal-title">Text in a modal</h2>
-                                        <p id="simple-modal-description">
-                                            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                                        </p>
+                                <button className="forum-name__post__btn--comment" onClick={e => this.openCommentModal(e, item.id)} > Comments</button>
 
-                                    </div>}
-                                </Modal>
                                 {/* 
                                 {this.state.forum.post[index].renderComment &&
                                     <form className="forum-name__post__comment" onSubmit={this.handleComment} id={item.title} index={index}>
@@ -183,6 +184,23 @@ class ForumName extends Component {
                         )}
 
                     </section>
+                    <Modal
+                        open={this.state.modalCommentDisplay}
+                        onClose={this.modalCommentSwitch}
+
+                    >
+                        <Paper className="forum-name__post__comment-modal">
+
+                            <h2 >{this.props.currentPost.title}</h2>
+                            <p >
+                                {this.props.currentPost.content}
+                            </p>
+                            <div>
+                                {this.props.currentPost.comments && this.props.currentPost.comments.map(item =>
+                                    <p>{item.content}</p>)}
+                            </div>
+                        </Paper>
+                    </Modal>
                 </main>
             );
         } else { return null }
@@ -193,14 +211,17 @@ class ForumName extends Component {
 ForumName.propTypes = {
     fetchForumByName: PropTypes.func.isRequired,
     currentForum: PropTypes.object.isRequired,
-    createPostByForumID: PropTypes.func.isRequired
+    createPostByForumID: PropTypes.func.isRequired,
+    fetchPostbyID: PropTypes.func.isRequired,
+    currentPost: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = (state) => {
 
     return {
 
-        currentForum: state.forums.currentForum
+        currentForum: state.forums.currentForum,
+        currentPost: state.forums.currentPost
     };
 };
-export default connect(mapStateToProps, { fetchForumByName, createPostByForumID })(ForumName);
+export default connect(mapStateToProps, { fetchForumByName, createPostByForumID, fetchPostbyID })(ForumName);
