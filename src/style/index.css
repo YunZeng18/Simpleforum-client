@@ -287,6 +287,26 @@ ul {
           transform: translate(20%, 15%);
 }
 
+.forum-name__post__comment-modal__description {
+  margin: 1rem;
+}
+
+.forum-name__post__comment-modal .comment-modal__textarea {
+  width: 100%;
+}
+
+.forum-name__post__comment-modal__comments {
+  margin-top: 1rem;
+}
+
+.forum-name__post__comment-modal__comment {
+  margin-top: 0.7rem;
+}
+
+.forum-name__post__comment-modal__timestamp {
+  font-size: 0.5rem;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "JetBrains Mono", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;

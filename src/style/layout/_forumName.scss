@@ -58,6 +58,22 @@
 			@extend .container;
 			width: 70%;
 			transform: translate(20%, 15%);
+			&__description {
+				margin: 1rem;
+			}
+			.comment-modal__textarea {
+				width: 100%;
+			}
+
+			&__comments {
+				margin-top: 1rem;
+			}
+			&__comment {
+				margin-top: 0.7rem;
+			}
+			&__timestamp {
+				font-size: 0.5rem;
+			}
 		}
 	}
 }

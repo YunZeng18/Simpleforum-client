@@ -8,6 +8,7 @@ const GET_FORUM_BYNAME = "GET_FORUM_BYNAME";
 const GET_FORUM_BYID = "GET_FORUM_BYID";
 const ADD_POST = "ADD_POST";
 const GET_POST_BYID = "GET_POST_BYID";
+const ADD_COMMENT = "ADD_COMMENT";
 
 
 const initialState = {
@@ -16,7 +17,9 @@ const initialState = {
     currentForum: {
         newPost: {}//this prevents undefined errors
     },
-    currentPost: {}
+    currentPost: {
+        newComment: {}
+    }
 }
 
 export const fetchForums = () => dispatch => {
@@ -66,6 +69,15 @@ export const fetchForumByID = (id) => dispatch => {
         .catch(error => console.log(error));
 
 }
+export const fetchPostbyID = (id) => dispatch => {
+    axios.get(`${API_URL}/posts/id=${id}`)
+        .then(res => res.data)
+        .then(currentPost => dispatch({
+            type: GET_POST_BYID,
+            payload: currentPost
+        }))
+        .catch(error => console.log(error));
+}
 export const createPostByForumID = (data) => dispatch => {
     axios
         .post(`${API_URL}/posts/`, {
@@ -84,14 +96,19 @@ export const createPostByForumID = (data) => dispatch => {
 
 }
 
-export const fetchPostbyID = (id) => dispatch => {
-    axios.get(`${API_URL}/posts/id=${id}`)
+export const createCommentByPostID = (data) => dispatch => {
+    axios.post(`${API_URL}/comments/`, {
+        post_id: data.post_id,
+        content: data.content
+    })
         .then(res => res.data)
-        .then(currentPost => dispatch({
-            type: GET_POST_BYID,
-            payload: currentPost
-        }))
-        .catch(error => console.log(error));
+        .then(comment => {
+            dispatch({
+                type: ADD_COMMENT,
+                payload: comment
+            });
+
+        }).catch(error => console.log(error));
 }
 
 const reducer = (state = initialState, action) => {
@@ -130,7 +147,17 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 currentPost: action.payload.post
             }
-
+        case ADD_COMMENT:
+            const comments = [...state.currentPost.comments];
+            comments.unshift(action.payload);
+            return {
+                ...state,
+                currentPost: {
+                    ...state.currentPost,
+                    comments: comments,
+                    newComment: action.payload
+                }
+            }
         default:
             return state;
     }

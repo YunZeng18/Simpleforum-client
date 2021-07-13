@@ -1,10 +1,8 @@
-import axios from 'axios';
 import React, { Component } from 'react';
-import { API_URL } from '../App';
 import timeDisplay from './helper/timeFormat';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { fetchForumByName, createPostByForumID, fetchPostbyID } from '../store/reducers/forumReducer';
+import { fetchForumByName, createPostByForumID, fetchPostbyID, createCommentByPostID } from '../store/reducers/forumReducer';
 import Modal from '@material-ui/core/Modal';
 import { Paper } from '@material-ui/core';
 
@@ -21,6 +19,7 @@ class ForumName extends Component {
         this.handlePost = this.handlePost.bind(this);
         this.modalCommentSwitch = this.modalCommentSwitch.bind(this);
         this.openCommentModal = this.openCommentModal.bind(this);
+        this.handleComment = this.handleComment.bind(this);
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -34,8 +33,8 @@ class ForumName extends Component {
                 currentForum: {
                     posts: this.props.currentForum.posts.map(item => ({ id: item.id, renderPost: false }))
                 }
-            });
-
+            }, () => console.log(this.state.currentForum));
+            console.log('update');
         }
 
         if (this.props.currentForum.newPost.id !== prevProps.currentForum.newPost.id) {
@@ -60,8 +59,7 @@ class ForumName extends Component {
 
         //the first time it runs will create a new rednerCommet attribute and flip the undefined attribute to true with !
         //afterwards it will just flip the boolean with !
-
-
+        console.log(this.state.currentForum);
         let post = { ...posts[index], renderPost: !this.state.currentForum.posts[index].renderPost };
 
         posts[index] = post;
@@ -109,7 +107,7 @@ class ForumName extends Component {
 
             modalCommentDisplay: true
         })
-        console.log(this.props);
+
 
         // event.preventDefault();
         // const comment = event.target.comment.value;
@@ -140,6 +138,24 @@ class ForumName extends Component {
 
         // }
 
+    }
+    handleComment(e) {
+        e.preventDefault();
+        const comment = e.target.newComment.value;
+
+        if (!comment) {
+            alert("Please fill in a title and a content for the post.");
+        } else {
+            console.log(this.props.currentPost);
+            this.props.createCommentByPostID(
+                {
+                    post_id: this.props.currentPost.id,
+                    content: comment
+                }
+            );
+
+
+        }
     }
     render() {
 
@@ -191,13 +207,19 @@ class ForumName extends Component {
                     >
                         <Paper className="forum-name__post__comment-modal">
 
-                            <h2 >{this.props.currentPost.title}</h2>
-                            <p >
+                            <h2 className="forum-name__post__comment-modal__title">{this.props.currentPost.title}</h2>
+                            <p className="forum-name__post__comment-modal__description">
                                 {this.props.currentPost.content}
                             </p>
-                            <div>
+
+                            <form onSubmit={this.handleComment}>
+                                <textarea className='comment-modal__textarea' id="newComment" type='texarea' placeholder="what do you think?" />
+                                <button className="btn " value="Submit">Submit</button>
+                            </form>
+                            <div className='forum-name__post__comment-modal__comments'>
+                                <h3>Comments</h3>
                                 {this.props.currentPost.comments && this.props.currentPost.comments.map(item =>
-                                    <p>{item.content}</p>)}
+                                    <p className="forum-name__post__comment-modal__comment" key={item.id}>{item.content} <span className="forum-name__post__comment-modal__timestamp">posted {timeDisplay(item.updated_at)}</span></p>)}
                             </div>
                         </Paper>
                     </Modal>
@@ -214,6 +236,7 @@ ForumName.propTypes = {
     createPostByForumID: PropTypes.func.isRequired,
     fetchPostbyID: PropTypes.func.isRequired,
     currentPost: PropTypes.object.isRequired,
+    createCommentByPostID: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => {
@@ -224,4 +247,4 @@ const mapStateToProps = (state) => {
         currentPost: state.forums.currentPost
     };
 };
-export default connect(mapStateToProps, { fetchForumByName, createPostByForumID, fetchPostbyID })(ForumName);
+export default connect(mapStateToProps, { fetchForumByName, createPostByForumID, fetchPostbyID, createCommentByPostID })(ForumName);
